@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday AunAun 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8a0a8;
+    --rose-deep: #c2637a;
+    --rose-pale: #fdf0f2;
+    --gold: #d4a847;
+    --gold-pale: #fdf6e3;
+    --cream: #fef9f5;
+    --text-dark: #2a1a1f;
+    --text-mid: #6b4352;
+    --text-soft: #b08090;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── PARTICLES ── */
+  #particles {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    width: 10px; height: 10px;
+    border-radius: 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at 60% 30%, #fde8ee 0%, #fdf4f0 40%, var(--cream) 80%);
+  }
+
+  .hero-tag {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: var(--rose-deep);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 1.05;
+    color: var(--text-dark);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--rose-deep);
+  }
+
+  .age-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--rose-deep);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 1.4rem;
+    border-radius: 999px;
+    margin: 1.5rem 0;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-date {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: var(--text-soft);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem;
+    font-size: 0.8rem; color: var(--text-soft);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    animation: bounce 2s infinite 2s;
+    opacity: 0;
+    animation: fadeIn 1s 2s forwards, bounce 2s 3s infinite;
+  }
+  .scroll-hint::after {
+    content: '↓';
+    font-size: 1.2rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(8px); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+
+  .section-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--rose-deep);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── PHOTO GRID ── */
+  .photos-section {
+    background: linear-gradient(135deg, #fde8ee 0%, #fdf4f0 100%);
+  }
+  .photos-section > div { max-width: 900px; margin: 0 auto; padding: 5rem 1.5rem; }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .photo-card {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(194, 99, 122, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .photo-card:hover {
+    transform: translateY(-6px) rotate(-1deg);
+    box-shadow: 0 16px 50px rgba(194, 99, 122, 0.25);
+  }
+  .photo-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .photo-card:first-child { grid-row: span 2; }
+
+  /* ── WISH CARD ── */
+  .wish-card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 2px dashed var(--rose);
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+  .wish-card::before {
+    content: '✦';
+    position: absolute; top: 1rem; right: 1.5rem;
+    font-size: 1.5rem; color: var(--rose);
+    opacity: 0.5;
+  }
+  .wish-card p {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+  .wish-card .signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-soft);
+    margin-top: 1rem;
+    text-align: right;
+  }
+
+  /* ── GIFT CARD ── */
+  .gift-section { text-align: center; }
+
+  .gift-card-wrapper {
+    perspective: 1200px;
+    margin: 2.5rem auto 0;
+    width: min(480px, 100%);
+    cursor: pointer;
+  }
+  .gift-card-inner {
+    position: relative;
+    width: 100%; aspect-ratio: 1.6 / 1;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+  }
+  .gift-card-wrapper.flipped .gift-card-inner {
+    transform: rotateY(180deg);
+  }
+  .gift-card-face, .gift-card-back {
+    position: absolute; inset: 0;
+    border-radius: 20px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem;
+  }
+  .gift-card-face {
+    background: linear-gradient(135deg, var(--rose-deep) 0%, #9b3058 100%);
+    color: #fff;
+    box-shadow: 0 20px 60px rgba(194, 99, 122, 0.4);
+  }
+  .gift-card-face h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+  .gift-card-face p { font-size: 0.9rem; opacity: 0.8; }
+  .gift-card-face .tap-hint {
+    position: absolute; bottom: 1rem;
+    font-size: 0.75rem; opacity: 0.6;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+  }
+  .gift-card-back {
+    background: linear-gradient(135deg, var(--gold-pale), #fff8e8);
+    transform: rotateY(180deg);
+    border: 2px solid var(--gold);
+    box-shadow: 0 20px 60px rgba(212, 168, 71, 0.3);
+    gap: 0.6rem;
+  }
+  .gift-card-back .from-label {
+    font-size: 0.8rem; color: var(--text-soft); letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .gift-card-back h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--text-dark);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .gift-card-back .redeem-code {
+    background: var(--rose-deep);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 4px;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+  }
+  .gift-card-back .valid {
+    font-size: 0.75rem; color: var(--text-soft);
+  }
+
+  /* ── INTERACTIVE BALLOONS ── */
+  .balloon-area {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  .balloons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  .balloon {
+    width: 70px; height: 85px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    animation: sway 3s ease-in-out infinite;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+  }
+  .balloon:nth-child(2) { animation-delay: 0.4s; }
+  .balloon:nth-child(3) { animation-delay: 0.8s; }
+  .balloon:nth-child(4) { animation-delay: 1.2s; }
+  .balloon:nth-child(5) { animation-delay: 0.6s; }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-4deg) translateY(0); }
+    50%       { transform: rotate(4deg) translateY(-8px); }
+  }
+  .balloon::before {
+    content: '';
+    position: absolute; bottom: -2px;
+    left: 50%; transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid currentColor;
+  }
+  .balloon::after {
+    content: '';
+    position: absolute; bottom: -30px;
+    left: 50%; transform: translateX(-50%);
+    width: 1px; height: 28px;
+    background: #aaa;
+  }
+  .balloon:hover { transform: scale(1.12) rotate(-2deg); }
+  .balloon.pop {
+    animation: pop 0.3s forwards;
+  }
+  @keyframes pop {
+    0%   { transform: scale(1); opacity: 1; }
+    50%  { transform: scale(1.4); opacity: 0.7; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  .balloon-msg {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: var(--text-mid);
+    margin-top: 1.5rem;
+    min-height: 2rem;
+    transition: opacity 0.3s;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: var(--text-soft);
+  }
+  footer strong { color: var(--rose-deep); }
+
+  /* ── CONFETTI BURST ── */
+  .confetti-piece {
+    position: fixed;
+    width: 10px; height: 10px;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 2px;
+    animation: confettiFly 1s ease-out forwards;
+  }
+  @keyframes confettiFly {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-200px) rotate(720deg); opacity: 0; }
+  }
+
+  @media (max-width: 600px) {
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-card:first-child { grid-row: span 1; }
+    .photo-card { aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating petals -->
+<div id="particles"></div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <p class="hero-tag">✦ a very special day ✦</p>
+  <h1>Happy Birthday<br><em>AunAun</em></h1>
+  <div class="age-badge">🎂 Turning 25 &nbsp;·&nbsp; May 30, 2026</div>
+  <p class="hero-date">อันอัน ✨</p>
+  <div class="scroll-hint">scroll</div>
+</div>
+
+<!-- ── PHOTOS ── -->
+<div class="photos-section">
+  <div>
+    <span class="section-label">us, always</span>
+    <h2 class="section-title">Some of my favourite moments with you 🤍</h2>
+    <div class="photo-grid">
+      <div class="photo-card" id="photo1" style="aspect-ratio: 3/4; overflow:hidden;"></div>
+      <div class="photo-card" id="photo2" style="aspect-ratio: 3/4; overflow:hidden;"></div>
+      <div class="photo-card" style="background: linear-gradient(135deg, #fde8ee, #fdf4f0); display:flex; align-items:center; justify-content:center; aspect-ratio:16/9;">
+        <p style="font-family:'Caveat',cursive; font-size:1.4rem; color:var(--rose-deep); text-align:center; padding:1rem;">More memories to come... 💕</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BIRTHDAY WISH ── -->
+<section>
+  <span class="section-label">from the heart</span>
+  <h2 class="section-title">คำอวยพร 🌸</h2>
+  <div class="wish-card">
+    <p>
+      สุขสันต์วันเกิดนะค้าบบ<br>
+      ขอให้เธอมีความสุขมาก ๆ<br>
+      ได้ทำสิ่งที่อยากทำ ได้กินของอร่อยเยอะ ๆ เดี๋ยวเค้าพาไปเอง!<br>
+      สุขภาพแข็งแรง เอนจอยกับงาน<br>
+      เธอเก่งอยู่แล้วเค้ารู้~<br>
+      มีอะไรก็บอกน้าเค้าคอยรับฟัง<br>
+      อย่าคิดมาก happy happy life! 🌸
+    </p>
+    <p class="signature">— Saint 💌</p>
+  </div>
+</section>
+
+
+<!-- ── BALLOONS ── -->
+<section class="balloon-area">
+  <span class="section-label">pop them!</span>
+  <h2 class="section-title">Pop a balloon for a wish 🎈</h2>
+  <div class="balloons" id="balloons">
+    <div class="balloon" style="background:#e8a0a8; color:#e8a0a8;" data-wish="ได้กินซูชิโระเยอะๆ 🍣"></div>
+    <div class="balloon" style="background:#a8c4e8; color:#a8c4e8;" data-wish="เอนจอยกับงาน 💼✨"></div>
+    <div class="balloon" style="background:#a8e8c4; color:#a8e8c4;" data-wish="ได้ไปญี่ปุ่น 🇯🇵🌸"></div>
+    <div class="balloon" style="background:#e8d4a8; color:#e8d4a8;" data-wish="มีความสุขมากๆๆๆๆ 💕"></div>
+    <div class="balloon" style="background:#d4a8e8; color:#d4a8e8;" data-wish="ตามใจเค้าเยอะๆ 😏💜"></div>
+  </div>
+  <p class="balloon-msg" id="balloon-msg">← Click a balloon!</p>
+</section>
+
+<!-- ── GIFT CARD ── -->
+<section class="gift-section">
+  <span class="section-label">a little surprise</span>
+  <h2 class="section-title">Your Birthday Gift 🎁</h2>
+  <p style="color: var(--text-soft);">From Saint — just for you. Tap to reveal!</p>
+  <div class="gift-card-wrapper" id="giftCard" onclick="this.classList.toggle('flipped'); if(this.classList.contains('flipped')) launchConfetti()">
+    <div class="gift-card-inner">
+      <div class="gift-card-face">
+        <h3>🎁 A Birthday Gift</h3>
+        <p>for AunAun อันอัน</p>
+        <p class="tap-hint">tap to open ↓</p>
+      </div>
+      <div class="gift-card-back">
+        <p class="from-label">✦ From Saint ✦</p>
+        <h3>🍽️ Free Dinner<br>on me!</h3>
+        <div class="redeem-code">FREE DINNER</div>
+        <p class="valid">Redeemable anytime · No expiry · Just say the word 💌</p>
+        <p style="font-size:0.72rem; color:#c2637a; margin-top:6px; font-family:'Caveat',cursive; font-size:1rem;">* ยกเว้น Sushiro ทุกกรณี 🚫🍣</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  Made for <strong>AunAun อันอัน</strong> 🌸<br>
+  <span style="font-size:0.85rem;">Happy 25th Birthday — May 30, 2026</span>
+</footer>
+
+<script>
+  // ── PETALS ──
+  const particleContainer = document.getElementById('particles');
+  const colors = ['#e8a0a8','#f7c5cc','#fde8ee','#d4a847','#f9e4b7','#c2a0e8'];
+  for(let i = 0; i < 30; i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.cssText = `
+      left: ${Math.random()*100}%;
+      width: ${6+Math.random()*10}px;
+      height: ${6+Math.random()*10}px;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration: ${5+Math.random()*10}s;
+      animation-delay: ${Math.random()*8}s;
+      border-radius: ${Math.random()>0.5?'50% 0':'50%'};
+      opacity: 0.7;
+    `;
+    particleContainer.appendChild(p);
+  }
+
+  // ── BALLOONS ──
+  document.querySelectorAll('.balloon').forEach(b=>{
+    b.addEventListener('click', function(){
+      if(this.classList.contains('pop')) return;
+      document.getElementById('balloon-msg').textContent = this.dataset.wish;
+      this.classList.add('pop');
+      launchConfettiAt(this);
+      setTimeout(()=>{
+        const remaining = document.querySelectorAll('.balloon:not(.pop)').length;
+        if(remaining === 0){
+          document.getElementById('balloon-msg').textContent = '🎉 All balloons popped! You are unstoppable!';
+        }
+      }, 400);
+    });
+  });
+
+  // ── CONFETTI ──
+  function launchConfetti(){
+    const confColors = ['#e8a0a8','#c2637a','#d4a847','#a8c4e8','#d4a8e8','#a8e8c4'];
+    for(let i=0; i<40; i++){
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left: ${Math.random()*100}vw;
+        top: ${Math.random()*80+10}vh;
+        background: ${confColors[Math.floor(Math.random()*confColors.length)]};
+        width: ${6+Math.random()*8}px;
+        height: ${6+Math.random()*8}px;
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        transform: rotate(${Math.random()*360}deg);
+        animation-duration: ${0.8+Math.random()*0.6}s;
+        animation-delay: ${Math.random()*0.3}s;
+      `;
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 1500);
+    }
+  }
+
+  function launchConfettiAt(el){
+    const rect = el.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+    const confColors = ['#e8a0a8','#c2637a','#d4a847','#a8c4e8','#d4a8e8'];
+    for(let i=0;i<20;i++){
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `
+        left: ${cx + (Math.random()-0.5)*60}px;
+        top: ${cy}px;
+        background: ${confColors[Math.floor(Math.random()*confColors.length)]};
+        width: 8px; height: 8px;
+        border-radius: ${Math.random()>0.5?'50%':'2px'};
+        animation-duration: ${0.6+Math.random()*0.5}s;
+      `;
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 1200);
+    }
+  }
+
+  // ── PHOTO PLACEHOLDERS (images from your uploads) ──
+  // These represent your actual photos — add the real image src if hosting online
+  function makeImg(src, fallbackHtml){
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;border-radius:20px;';
+    img.onerror = function(){ this.parentElement.innerHTML = fallbackHtml; };
+    return img;
+  }
+
+  document.getElementById('photo1').appendChild(makeImg('IMG01.jpg',
+    `<div style="width:100%;height:100%;min-height:340px;background:linear-gradient(160deg,#3a2a2f,#5c3040);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+      <span style="font-size:2.5rem;">📸</span>
+      <p style="font-family:'Caveat',cursive;font-size:1.1rem;color:rgba(255,255,255,0.8);text-align:center;">Place IMG01.jpg<br>in the same folder</p>
+    </div>`
+  ));
+
+  document.getElementById('photo2').appendChild(makeImg('IMG02.jpg',
+    `<div style="width:100%;height:100%;min-height:220px;background:linear-gradient(135deg,#d4c5a0,#f0e8d0);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;">
+      <span style="font-size:2.5rem;">📸</span>
+      <p style="font-family:'Caveat',cursive;font-size:1.2rem;color:#4a3520;text-align:center;">Place IMG02.jpg<br>in the same folder</p>
+    </div>`
+  ));
+
+</script>
+</body>
+</html>
